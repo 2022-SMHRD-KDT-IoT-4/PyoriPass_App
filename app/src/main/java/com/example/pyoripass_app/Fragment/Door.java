@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -19,12 +20,22 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.pyoripass_app.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+
+
 public class Door extends Fragment {
 
     Context context;
     Button btn_open;
     RequestQueue requestQueue;
     StringRequest request;
+
+    String[] open;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +47,8 @@ public class Door extends Fragment {
         btn_open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                send();
+                send();
+
             }
         });
 
@@ -53,6 +65,8 @@ public class Door extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         Log.v("response", response);
+
+                        open = response.split(":");
                     }
                 },
                 new Response.ErrorListener() {
@@ -61,6 +75,17 @@ public class Door extends Fragment {
                         error.printStackTrace();
                     }
                 }
-        );
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                String btn_num = "1";
+
+                params.put("btn_num", btn_num);
+
+                return params;
+            }
+        };
+        requestQueue.add(request);
     }
 }
