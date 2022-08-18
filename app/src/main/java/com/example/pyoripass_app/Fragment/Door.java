@@ -35,8 +35,6 @@ public class Door extends Fragment {
     RequestQueue requestQueue;
     StringRequest request;
 
-    String[] open;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,14 +57,12 @@ public class Door extends Fragment {
         requestQueue = Volley.newRequestQueue(context);
 
         request = new StringRequest(
-                Request.Method.POST,
-                "http://172.30.1.12:8083/pyoripass/dooropen.do",
+                Request.Method.GET,
+                "http://172.30.1.100:5000/doorlock/on",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.v("response", response);
-
-                        open = response.split(":");
                     }
                 },
                 new Response.ErrorListener() {

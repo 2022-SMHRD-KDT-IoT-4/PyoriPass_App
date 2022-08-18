@@ -71,7 +71,7 @@ public class Reservation extends Fragment {
         
         bundle = this.getArguments();
         id = bundle.getString("host_id");
-        res_txt.setText(id + "님 펜션의 일정");
+        res_txt.setText("예약 일정");
         Log.v("id", id);
 
         getReservation();

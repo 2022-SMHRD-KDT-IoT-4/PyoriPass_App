@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
                     // door fragment 이동
                     getSupportFragmentManager().beginTransaction().replace(R.id.Frame, door).commit();
                 }
-
                 return true;
             }
         });
