@@ -42,6 +42,8 @@ public class Door extends Fragment {
         btn_open = door.findViewById(R.id.btn_open);
         context = container.getContext();
 
+        btn_open.bringToFront();
+
         btn_open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
